@@ -7,7 +7,10 @@ const Ehome = () => {
       <div className="layout-container">
         {/* <!-- Menu --> */}
 
-        <div>
+        <div
+          className="layout-menu bg-menu-theme h-100 overflow-auto"
+          style={{ width: "250px", minWidth: "250px", maxWidth: "250px" }}
+        >
           <Sidebar></Sidebar>
         </div>
 

@@ -3,12 +3,15 @@ import Sidebar from "../share/Sidebar";
 
 
 const Eorder = () => {
-    return (
-        <div className="layout-wrapper layout-content-navbar">
+  return (
+    <div className="layout-wrapper layout-content-navbar">
       <div className="layout-container">
         {/* <!-- Menu --> */}
 
-        <div>
+        <div
+          className="layout-menu bg-menu-theme h-100 overflow-auto"
+          style={{ width: "250px", minWidth: "250px", maxWidth: "250px" }}
+        >
           <Sidebar></Sidebar>
         </div>
 
@@ -70,7 +73,7 @@ const Eorder = () => {
         {/* <!-- / Layout page --> */}
       </div>
     </div>
-    );
+  );
 };
 
 export default Eorder;

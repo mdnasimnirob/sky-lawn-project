@@ -15008,6 +15008,8 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   align-items: center;
   flex: 0 1 auto;
   margin: 0;
+  background: #f2f2f2;
+  color:#007bff
 }
 .menu-item.disabled .menu-link {
   cursor: not-allowed !important;
@@ -15022,6 +15024,21 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 }
 .menu:not(.menu-no-animation) .menu-link > :not(.menu-icon) {
   transition: opacity 0.3s ease-in-out;
+}
+
+
+
+.menu-link:hover {
+  background-color: #f0f0f0;
+}
+
+.active-link {
+  background-color: #d7dbe1; 
+  color: white; 
+  border-radius: 4px;
+}
+.active-link:hover{
+  background-color: #d7dbe1;
 }
 
 .menu-sub {
@@ -15223,7 +15240,18 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 .content-wrapper > *,
 .layout-menu {
   min-height: 1px;
+  
 }
+
+.layout-menu * {
+  
+  overflow-x: hidden; 
+  
+}
+
+
+
+
 
 .layout-navbar,
 .content-footer {

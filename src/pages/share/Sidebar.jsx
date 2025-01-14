@@ -3,47 +3,71 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [isEcommerceOpen, setIsEcommerceOpen] = useState(false);
+  const [ProductOpen, setProductOpen] = useState(false);
 
   const toggleEcommerceMenu = () => {
     setIsEcommerceOpen((prev) => !prev);
   };
+
+  const toogleProductMenu = () => {
+    setProductOpen((open) => !open);
+  };
   return (
-    <>
+
+
+    <div className="d-flex">
       <aside
         id="layout-menu"
-        className=" layout-menu menu-vertical menu bg-menu-theme"
+        className="layout-menu menu-vertical bg-menu-theme position-fixed w-20 h-100"
+        style={{ overflowY: "hidden" }}
       >
         <div className="app-brand demo">
-          <NavLink to='/' className="text-primary fs-3 ">Sky Lawn</NavLink>
+          <NavLink to="/" className="text-primary fs-3 py-3" style={{ overflowY: "hidden" }}>
+            Sky Lawn
+          </NavLink>
           <NavLink
-            href="javascript:void(0);"
+            to="/"
             className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
           >
             <i className="bx bx-chevron-left bx-sm align-middle"></i>
           </NavLink>
         </div>
         <ul className="menu-inner py-1">
-          
+
 
           {/* <!-- Dashboard -->  */}
-           <li className="menu-item ">
-            <NavLink to='/dashboard'  className="menu-link">
+          <li className="menu-item ">
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) => {
+                return isActive ? "menu-link active-link text-primary " : "menu-link";
+              }}
+            >
               <i className="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="Analytics">Dashboard</div>
+              <div>Dashboard</div>
             </NavLink>
-          </li> 
-           {/* <!-- Home -->  */}
-           <li className="menu-item ">
-            <NavLink to='/home' className="menu-link">
+
+          </li>
+          {/* <!-- Home -->  */}
+          <li className="menu-item ">
+            <NavLink
+              to="/home"
+              className={({ isActive }) => {
+                return isActive ? "menu-link active-link text-primary " : "menu-link";
+              }}
+            >
               <i className="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="Analytics">Home</div>
+              <div>Home</div>
             </NavLink>
           </li>
 
           {/* E-Commerce */}
           <li className={`menu-item ${isEcommerceOpen ? "open" : ""}`}>
             <NavLink
-              className="menu-link menu-toggle"
+              className={({ isActive }) => {
+                return isActive ? "menu-toggle menu-link text-black " : "";
+              }}
+
               onClick={toggleEcommerceMenu}
             >
               <i className="menu-icon tf-icons bx bx-layout"></i>
@@ -53,141 +77,188 @@ const Sidebar = () => {
             {isEcommerceOpen && (
               <ul className="menu-sub">
                 <li className="menu-item">
-                  <NavLink to='/e-home' className="menu-link">
+                  <NavLink to='/e-home' className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }} >
                     <div data-i18n="Without menu">Home</div>
                   </NavLink>
                 </li>
                 <li className="menu-item">
-                  <NavLink to='/e-order' className="menu-link">
+                  <NavLink to='/e-order' className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}>
                     <div data-i18n="Without navbar">Orders</div>
                   </NavLink>
                 </li>
                 <li className="menu-item">
-                  <NavLink to='e-customers' className="menu-link">
+                  <NavLink to='/e-customers' className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}>
                     <div data-i18n="Container">Customers</div>
                   </NavLink>
                 </li>
                 <li className="menu-item">
-                  <NavLink to='e-reports' className="menu-link">
-                    <div data-i18n="Fluid">Reports</div>
+                  <NavLink to='/e-reports' className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}>
+                    <div data-i18n="Container">Report</div>
                   </NavLink>
                 </li>
                 <li className="menu-item">
-                  <NavLink to='e-settings' className="menu-link">
-                    <div data-i18n="Blank">Settings</div>
+                  <NavLink to='/e-status' className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}>
+                    <div data-i18n="Container">Status</div>
                   </NavLink>
                 </li>
                 <li className="menu-item">
-                  <NavLink to='e-status' className="menu-link">
-                    <div data-i18n="Blank">Status</div>
+                  <NavLink to='/e-settings' className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}>
+                    <div data-i18n="Container">Setting</div>
                   </NavLink>
-                </li>             
+                </li>
+
               </ul>
             )}
           </li>
 
           {/* <!-- Products --> */}
-          <li className="menu-item">
-            <a href="javascript:void(0);" className="menu-link menu-toggle">
+          <li className={`menu-item ${ProductOpen ? "open" : ""}`}>
+            <NavLink onClick={toogleProductMenu} className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-layout"></i>
               <div data-i18n="Layouts">Products</div>
-            </a>
+            </NavLink>
 
             <ul className="menu-sub">
               <li className="menu-item">
-                <a href="products-all-products.html" className="menu-link">
+                <NavLink to='/allproducts' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Without menu">All products</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="products-add-new-products.html" className="menu-link">
+                <NavLink to='/addnewproducts' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Without navbar">Add new products</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="products-categories.html" className="menu-link">
+                <NavLink to='/categories' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Container">Categories</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="products-tags.html" className="menu-link">
+                <NavLink to='/tags' className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Fluid">Tags</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="attributes.html" className="menu-link">
+                <NavLink to="/attributes" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Attributes</div>
-                </a>
+                </NavLink>
               </li>
               <li className="menu-item">
-                <a href="layouts-blank.html" className="menu-link">
+                <NavLink to="/reviews" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Reviews</div>
-                </a>
+                </NavLink>
               </li>
             </ul>
           </li>
           {/* <!-- Payments --> */}
           <li className="menu-item">
-            <a href="cards-basic.html" className="menu-link">
+            <NavLink to="/payments" className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-collection"></i>
               <div data-i18n="Basic">Payments</div>
-            </a>
+            </NavLink>
           </li>
           {/* <!-- Analytics --> */}
           <li className="menu-item">
-            <a href="javascript:void(0);" className="menu-link menu-toggle">
+            <NavLink className="menu-link menu-toggle">
               <i className="menu-icon tf-icons bx bx-layout"></i>
               <div data-i18n="Layouts">Analytics</div>
-            </a>
+            </NavLink>
 
             <ul className="menu-sub">
               <li className="menu-item">
-                <a href="analytics-overviews.html" className="menu-link">
+                <a href="analytics-overviews.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Without menu">Overviews</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-products.html" className="menu-link">
+                <a href="analytics-products.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Without navbar">Products</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-revenue.html" className="menu-link">
+                <a href="analytics-revenue.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Container">Revenue</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-oders.html" className="menu-link">
+                <a href="analytics-oders.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Fluid">Orders</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-variations.html" className="menu-link">
+                <a href="analytics-variations.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Variations</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-categories.html" className="menu-link">
+                <a href="analytics-categories.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Categories</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-coupons.html" className="menu-link">
+                <a href="analytics-coupons.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Coupons</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-taxes.html" className="menu-link">
+                <a href="analytics-taxes.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Taxes</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-downloads.html" className="menu-link">
+                <a href="analytics-downloads.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Downloads</div>
                 </a>
               </li>
               <li className="menu-item">
-                <a href="analytics-settings.html" className="menu-link">
+                <a href="analytics-settings.html" className={({ isActive }) => {
+                  return isActive ? "menu-link active-link text-primary " : "menu-link";
+                }}>
                   <div data-i18n="Blank">Settings</div>
                 </a>
               </li>
@@ -207,7 +278,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="pages-account-settings-account.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                 >
                   <div data-i18n="Account">Account</div>
                 </a>
@@ -215,7 +288,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="pages-account-settings-notifications.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                 >
                   <div data-i18n="Notifications">Notifications</div>
                 </a>
@@ -223,7 +298,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="pages-account-settings-connections.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                 >
                   <div data-i18n="Connections">Connections</div>
                 </a>
@@ -231,7 +308,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="pages-account-settings-connections.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                 >
                   <div data-i18n="Connections">Export personal data</div>
                 </a>
@@ -239,7 +318,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="pages-account-settings-connections.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                 >
                   <div data-i18n="Connections">Erase personal data</div>
                 </a>
@@ -256,7 +337,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="auth-login-basic.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                   target="_blank"
                 >
                   <div data-i18n="Basic">Login</div>
@@ -265,7 +348,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="auth-register-basic.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                   target="_blank"
                 >
                   <div data-i18n="Basic">Register</div>
@@ -274,7 +359,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="auth-forgot-password-basic.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                   target="_blank"
                 >
                   <div data-i18n="Basic">Forgot Password</div>
@@ -292,7 +379,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="auth-login-basic.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                   target="_blank"
                 >
                   <div data-i18n="Basic">General settings</div>
@@ -301,7 +390,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="auth-register-basic.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                   target="_blank"
                 >
                   <div data-i18n="Basic">Privacy</div>
@@ -310,7 +401,9 @@ const Sidebar = () => {
               <li className="menu-item">
                 <a
                   href="auth-forgot-password-basic.html"
-                  className="menu-link"
+                  className={({ isActive }) => {
+                    return isActive ? "menu-link active-link text-primary " : "menu-link";
+                  }}
                   target="_blank"
                 >
                   <div data-i18n="Basic">Policy</div>
@@ -320,14 +413,28 @@ const Sidebar = () => {
           </li>
 
           <li className="menu-item">
-            <a href="" target="_blank" className="menu-link">
+            <a className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary " : "menu-link";
+            }}>
+
+
+            </a>
+          </li>
+          <li className="menu-item">
+            <NavLink to="/support" className={({ isActive }) => {
+              return isActive ? "menu-link active-link text-primary " : "menu-link";
+            }}>
               <i className="menu-icon tf-icons bx bx-support"></i>
               <div data-i18n="Support">Support</div>
-            </a>
+            </NavLink>
           </li>
         </ul>
       </aside>
-    </>
+
+
+    </div>
+
+
   );
 }
 
